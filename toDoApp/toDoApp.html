@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Document</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ </head>
+<body>
+<style type="text/css">
+ .task{
+ width:160px;
+ background-color:#eee;
+ border:1px solid white;
+ position:relative;
+ padding-left:20px;
+}
+.close{
+ position:absolute;
+ cursor:pointer;
+ right:10px;
+}
+.checkBox{
+ position:absolute;
+ left:0px;
+}
+.checked{
+ text-decoration:line-through;
+}
+</style>
+<input type="text" value="Enter your task" id="field">
+<input type="button" value="Add" id="addButton">
+<div id="taskContainer"></div>
+
+
+<script type="text/javascript">
+//Placeholder
+var textfield=document.getElementById("field");
+ textfield.onfocus = function (){
+  if(textfield.value=="Enter your task"){
+   textfield.value="";
+  }
+ };
+ textfield.onblur = function(){
+  if (textfield.value ==""){
+   textfield.value="Enter your task";
+  }
+ };
+///////////////////////////////////
+var taskContainer = document.getElementById("taskContainer");
+var field = document.getElementById("field");
+var addButton = document.getElementById("addButton");
+var div = document.createElement('div');
+var span = document.createElement('span');
+var checkBox = document.createElement('input');
+
+
+addButton.onclick = function () {
+  var div = document.createElement('div');
+      var span = document.createElement('span');
+      var checkBox = document.createElement('input');
+   for (var i = 0; i<1; i++) {
+    
+     if (field.value =='Enter your task') {
+      break;
+     }
+     ////////////
+      checkBox.setAttribute("type", "checkbox");
+      checkBox.classList.add('checkBox');
+      //////////
+      span.classList.add('close');
+      span.innerHTML = '&times';
+     //////////
+     div.innerHTML = field.value;
+     div.classList.add('task');
+     div.appendChild(checkBox);
+     div.appendChild(span);
+     ////////
+     taskContainer.appendChild(div);
+     field.value="Enter your task";///Устанавливаем занчание по умоланию
+
+    }//For End
+        span.onclick = function () {
+       this.parentNode.parentNode.removeChild(div);////Удаляем родителей 
+      };
+/////////////////////////////
+     var marking = document.querySelector('div');///Выберем блок для зачеркивания
+     markingFunction = function (event) {
+      if (event.target.className === 'checkBox' && event.target.checked ) {//Определяем на каком элементе был клик
+   event.target.parentNode.classList.add('checked');
+  }
+  else if (event.target.className === 'checkBox' && !event.target.checked ) {
+   event.target.parentNode.classList.remove('checked');///Добавляем класс к родителю
+  }
+      
+     };
+     marking.addEventListener('click', markingFunction);    
+};
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+ <script src="main.js"></script>
+</body>
+</html>﻿
